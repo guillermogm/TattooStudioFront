@@ -1,9 +1,11 @@
 import React from 'react'
 
 export const NotFound = () => {
-  return (
-    <>
-    <h1>Not Found</h1>
-    </>
-  )
+    return (
+        <>
+            <div className="container-fluid text-center">
+                <h1>Not Found</h1>
+            </div>
+        </>
+    )
 }

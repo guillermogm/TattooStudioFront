@@ -3,7 +3,9 @@ import React from 'react'
 export const Home = () => {
   return (
     <>
-    <h1>HOME</h1>
+      <div className="container-fluid text-center">
+        <h1>HOME</h1>
+      </div>
     </>
   )
 }

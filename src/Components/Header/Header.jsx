@@ -1,5 +1,6 @@
 import React from 'react'
 import './Header.css'
+import { CNavigator } from '../CNavigator/CNavigator'
 
 export const Header = () => {
     return (
@@ -12,10 +13,10 @@ export const Header = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
-                        <a className="nav-item nav-link active" href="#">Home</a>
-                        <a className="nav-item nav-link" href="#">Register</a>
-                        <a className="nav-item nav-link" href="#">Login</a>
-                        <a className="nav-item nav-link" href="#">Profile</a>
+                        <CNavigator className="nav-item nav-link active" path="/" content="Home"/>
+                        <CNavigator className="nav-item nav-link active" path="/" content="Register"/>
+                        <CNavigator className="nav-item nav-link active" path="/" content="Login"/>
+                        <CNavigator className="nav-item nav-link active" path="/" content="Profile"/>
                     </div>
                 </div>
             </nav>
