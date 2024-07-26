@@ -6,7 +6,7 @@ export const Header = () => {
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a className="navbar-brand" href="#" id="Title">Tattoo Studio</a>
+                <CNavigator className="navbar-brand" path="/" id="Title" content="Tattoo Studio"/>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                         aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
