@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { getAllUsers } from '../../Services/apiCalls'
+import { deleteUserById, getAllUsers } from '../../Services/apiCalls'
+import "./User.css"
 
 export const Users = () => {
     const [users, setUsers] = useState([])
@@ -14,24 +15,24 @@ export const Users = () => {
             }
         }
         bringAllUsers()
-    }, [])
+    }, [users])
 
-    // const deleteUserHandler = async (e) => {
-    //     const id= e.target.name
-    //     const fullToken = JSON.parse(localStorage.getItem("fullToken"))
-    //     const token = fullToken.token
-    //     const res = await deleteUserById(id, token)
-    //     console.log(res);
-    //     if (res.success) {
+    const deleteUserHandler = async (e) => {
+        const id = e.target.name
+        console.log(id);
+        const fullToken = JSON.parse(localStorage.getItem("fullToken"))
+        const token = fullToken.token
+        const res = await deleteUserById(id, token)
+        if (res.success) {
 
-    //     }
-    // }
+        }
+    }
 
     return (
         <>
             <h1 className='text-center mt-5 mb-5'>Users</h1>
             <div className="container">
-                <table className="table">
+                <table className="table mb-5">
                     <thead className="table-dark">
                         <tr className="text-center" >
                             <th scope="col">id</th>
@@ -50,8 +51,10 @@ export const Users = () => {
                                     <td className="text-center">{user.firstName}</td>
                                     <td className="text-center">{user.lastName}</td>
                                     <td className="text-center">{user.email}</td>
-                                    <td className="text-center">{user.role === 1 ? "User" : "Admin"}</td>
-                                    <td className="text-center"><input type="button" name="" value="🛇" onClick="" /></td>
+                                    <td className="text-center">{user.roleId == 1 ? "User" : "Admin"}</td>
+                                    <td className="text-center">
+                                        <input type="button" className="delete" onClick={deleteUserHandler} name={user.id} value="🛇" />
+                                    </td>
                                 </tr>
                             )
                         })}

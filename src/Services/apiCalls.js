@@ -80,6 +80,8 @@ export const getAllUsers= async(token)=>{
     return await response.json()
 }
 export const deleteUserById= async(id,token)=>{
+    console.log(id);
+    console.log(token);
     const response= await fetch(`${URL}/api/users/${id}`, {
         method: "DELETE",
         headers: {
