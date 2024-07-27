@@ -68,3 +68,24 @@ export const updateProfile = async (changes, token) => {
     })
     return await response.json()
 }
+
+export const getAllUsers= async(token)=>{
+    const response= await fetch(`${URL}/api/users/`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization":`Bearer ${token}`
+        },
+    })
+    return await response.json()
+}
+export const deleteUserById= async(id,token)=>{
+    const response= await fetch(`${URL}/api/users/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization":`Bearer ${token}`
+        },
+    })
+    return await response.json()
+}

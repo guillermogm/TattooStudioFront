@@ -18,6 +18,7 @@ export const Header = () => {
                         <CNavigator className="nav-item nav-link active" path="/login" content="Login"/>
                         <CNavigator className="nav-item nav-link active" path="/profile" content="Profile"/>
                         <CNavigator className="nav-item nav-link active" path="/services" content="Services"/>
+                        <CNavigator className="nav-item nav-link active" path="/users" content="Users"/>
                     </div>
                 </div>
             </nav>
