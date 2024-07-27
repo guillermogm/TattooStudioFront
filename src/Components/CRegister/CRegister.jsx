@@ -19,7 +19,6 @@ export const CRegister = () => {
                 [e.target.name]: e.target.value
             }
         ))
-        console.log(credentials);
     }
 
 
@@ -35,7 +34,6 @@ export const CRegister = () => {
             }
 
         } catch (error) {
-            console.log(1);
             setError("Something unexpected happend.")
         }
     }
