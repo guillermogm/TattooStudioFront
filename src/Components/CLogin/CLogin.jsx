@@ -29,7 +29,6 @@ export const CLogin = () => {
       if (response.success) {
         navigate("/")
         const decodedToken =jwtDecode(response.token)
-        console.log(decodedToken);
         const fullToken={
           token:response.token,
           tokenData:decodedToken
