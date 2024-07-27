@@ -34,6 +34,13 @@ export const loginUser = async (credentials) => {
     });
 
     const result = await request.json();
-    console.log(result)
+
+    return result;
+}
+
+export const getServices= async() =>{
+    const request = await fetch(`${URL}/api/services`);
+    const result = await request.json();
+
     return result;
 }
