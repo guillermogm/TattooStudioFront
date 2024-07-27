@@ -35,7 +35,6 @@ export const Profile = () => {
             ...editData,
             [e.target.name]: e.target.value,
         })
-        console.log("editando", editData)
     }
 
     useEffect(() => {
@@ -45,7 +44,6 @@ export const Profile = () => {
             const bringProfile = async () => {
                 token = fullToken.token
                 const response = await getProfile(token)
-                console.log(response)
                 setProfileData(response.data)
             }
             bringProfile()
@@ -54,7 +52,7 @@ export const Profile = () => {
     }, [])
 
     const confirmButtonHandler = async()=>{
-        const response =await updateProfile(editData,fullToken.tokenData)
+        const response =await updateProfile(editData,fullToken.token)
         if(response.success){
            const newData= await getProfile(fullToken.token)
            setProfileData(newData.data)

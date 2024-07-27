@@ -1,4 +1,4 @@
-const  URL= "http://localhost:4006"
+const URL = "http://localhost:4006"
 
 export const registerUser = async (credentials) => {
 
@@ -38,33 +38,31 @@ export const loginUser = async (credentials) => {
     return result;
 }
 
-export const getServices= async() =>{
+export const getServices = async () => {
     const request = await fetch(`${URL}/api/services`);
     const result = await request.json();
 
     return result;
 }
 
-export const getProfile= async(token)=>{
-    const response= await fetch(`${URL}/api/users/profile`, {
+export const getProfile = async (token) => {
+    const response = await fetch(`${URL}/api/users/profile`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Authorization":`Bearer ${token}`
+            "Authorization": `Bearer ${token}`
         },
     })
     return await response.json()
 }
 
 
-export const updateProfile= async(changes,token)=>{
-    console.log(changes);
-    console.log(token);
-    const response= await fetch(`${URL}/api/users/profile`, {
+export const updateProfile = async (changes, token) => {
+    const response = await fetch(`${URL}/api/users/profile`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
-            "Authorization":`Bearer ${token}`
+            "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify(changes)
     })
