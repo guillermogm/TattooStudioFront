@@ -102,7 +102,7 @@ export const getProfileAppointments= async(token)=>{
 }
 
 export const deleteAppointmentById= async(id,token)=>{
-    const response= await fetch(`${URL}/api/appointments/${id}`, {
+    const response= await fetch(`http://localhost:4006/api/appointments/${id}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",

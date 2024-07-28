@@ -4,7 +4,8 @@ import "./User.css"
 
 export const Users = () => {
     const [users, setUsers] = useState([])
-
+    const [error, setError] = useState("")
+    let [update, setUpdate] = useState(0)
     useEffect(() => {
         const fullToken = JSON.parse(localStorage.getItem("fullToken"))
         const token = fullToken.token
@@ -18,16 +19,16 @@ export const Users = () => {
             }
         }
         bringAllUsers()
-    }, [users])
+    }, [update])
 
     const deleteUserHandler = async (e) => {
         const id = e.target.name
-        console.log(id);
         const fullToken = JSON.parse(localStorage.getItem("fullToken"))
         const token = fullToken.token
         const res = await deleteUserById(id, token)
         if (res.success) {
-            
+            setError("")
+            setUpdate(++ update)
         }else{
             setError("Error deleting user.")
         }
@@ -66,7 +67,7 @@ export const Users = () => {
                     </tbody>
                 </table>
             </div>
-            <h1 className='text-center mt-5 mb-5'>{Error}</h1>
+            <h1 className='text-center mt-5 mb-5'>{error}</h1>
         </>
     )
 }
