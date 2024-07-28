@@ -48,10 +48,11 @@ export const Appointments = () => {
                     </thead>
                     <tbody>
                         {appointments.length && appointments.map((appointment) => {
+                            let date= new Date (appointment.appointmentDate)
                             return (
                                 <tr key={appointment.id} className="text-center">
                                     <th scope="row">{appointment.id}</th>
-                                    <td>{appointment.appointmentDate}</td>
+                                    <td>{date.toISOString().slice(0, 16)}</td>
                                     <td>{appointment.service.serviceName}</td>
                                     <td>
                                         <input type="button" className="delete" onClick={deleteUserHandler} name={appointment.id} value="🛇" />
@@ -61,6 +62,9 @@ export const Appointments = () => {
                         })}
                     </tbody>
                 </table>
+            </div>
+            <div className="text-center">
+                <input type="button" className="btn btn-primary" value="Create" />
             </div>
             <h1 className="text-center mt-5 mb-5">{error}</h1>
         </>
