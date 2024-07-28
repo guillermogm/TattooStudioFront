@@ -4,7 +4,8 @@ import "./User.css"
 
 export const Users = () => {
     const [users, setUsers] = useState([])
-
+    const [error, setError] = useState("")
+    let [update, setUpdate] = useState(0)
     useEffect(() => {
         const fullToken = JSON.parse(localStorage.getItem("fullToken"))
         const token = fullToken.token
@@ -13,18 +14,23 @@ export const Users = () => {
             if (allUsers.success) {
                 setUsers(allUsers.data)
             }
+            else{
+                setError("Error getting user.")
+            }
         }
         bringAllUsers()
-    }, [users])
+    }, [update])
 
     const deleteUserHandler = async (e) => {
         const id = e.target.name
-        console.log(id);
         const fullToken = JSON.parse(localStorage.getItem("fullToken"))
         const token = fullToken.token
         const res = await deleteUserById(id, token)
         if (res.success) {
-
+            setError("")
+            setUpdate(++ update)
+        }else{
+            setError("Error deleting user.")
         }
     }
 
@@ -46,13 +52,13 @@ export const Users = () => {
                     <tbody>
                         {users.length && users.map((user) => {
                             return (
-                                <tr key={user.id}>
-                                    <th className="text-center" scope="row">{user.id}</th>
-                                    <td className="text-center">{user.firstName}</td>
-                                    <td className="text-center">{user.lastName}</td>
-                                    <td className="text-center">{user.email}</td>
-                                    <td className="text-center">{user.roleId == 1 ? "User" : "Admin"}</td>
-                                    <td className="text-center">
+                                <tr key={user.id} className="text-center">
+                                    <th scope="row">{user.id}</th>
+                                    <td>{user.firstName}</td>
+                                    <td>{user.lastName}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.roleId == 1 ? "User" : "Admin"}</td>
+                                    <td>
                                         <input type="button" className="delete" onClick={deleteUserHandler} name={user.id} value="🛇" />
                                     </td>
                                 </tr>
@@ -61,6 +67,7 @@ export const Users = () => {
                     </tbody>
                 </table>
             </div>
+            <h1 className='text-center mt-5 mb-5'>{error}</h1>
         </>
     )
 }
