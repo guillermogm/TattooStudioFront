@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import './Header.css'
 import { CNavigator } from '../CNavigator/CNavigator'
+import { useNavigate } from 'react-router-dom'
 
 export const Header = () => {
     const [token, setToken] = useState(null);
     const [role, setRole] = useState(null);
+    const navigate=useNavigate()
 
     useEffect(() => {
         const fullToken = JSON.parse(localStorage.getItem("fullToken"));
@@ -42,6 +44,7 @@ export const Header = () => {
         localStorage.removeItem("fullToken");
         setToken(null);
         setRole(null);
+        navigate("/")
     };
 
     return (

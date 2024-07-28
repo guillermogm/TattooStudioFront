@@ -35,6 +35,7 @@ export const CLogin = () => {
         }
         localStorage.setItem("fullToken", JSON.stringify(fullToken))
         isTokenValid(fullToken.tokenData.exp)
+        window.location.reload();
       } else {
         setError("Error login user.")
       }
