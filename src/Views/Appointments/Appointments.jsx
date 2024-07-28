@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { deleteAppointmentById, getProfileAppointments } from '../../Services/apiCalls'
+import { deleteAppointmentById, getProfileAppointments, getServices } from '../../Services/apiCalls'
 import "./Appointments.css"
+import { CSelect } from '../../Components/CSelect/CSelect'
 
 export const Appointments = () => {
     const [error, setError] = useState("")
@@ -12,6 +13,8 @@ export const Appointments = () => {
         serviceId: "",
         date: ""
     });
+    const [services, setServices]= useState([])
+
     useEffect(() => {
         const fullToken = JSON.parse(localStorage.getItem("fullToken"))
         const token = fullToken.token
@@ -26,6 +29,19 @@ export const Appointments = () => {
         }
         bringAppointments()
     }, [update])
+
+    useEffect(() => {
+        const bringServices = async () => {
+            const allServices = await getServices()
+            if (allServices.success) {
+                setServices(allServices.data)
+            }
+            else {
+                setError("Error getting Appointments.")
+            }
+        }
+        bringServices()
+    }, [])
 
     const deleteUserHandler = async (e) => {
         const id = e.target.name
@@ -49,7 +65,6 @@ export const Appointments = () => {
             console.log("You cannot pass")
             return
         }
-        console.log(e.target.value)
         setNewAppointment({
             ...newAppointment,
             [e.target.name]: e.target.value,
@@ -58,6 +73,7 @@ export const Appointments = () => {
     const todayFullTimeString = new Date()
         .toISOString()
         .slice(0, new Date().toISOString().lastIndexOf(":"));
+
     return (
         <>
             <h1 className="text-center mt-5 mb-5">Appointments</h1>
@@ -99,7 +115,14 @@ export const Appointments = () => {
                         />
                     </div>
                     <div className="col-2">
-                        {/* className={editing ? "mb-4 form-control" : "hidden"} */}
+                        <select defaultValue="" onChange={inputHandler}  className={editing ? "mb-4 form-control" : "hidden"}>
+                            <option disabled hidden value="">
+                            Choose Service
+                            </option>
+                            {services.map((service) => {
+                                return <option value={service.id} key={service.id}>{service.serviceName}</option>
+                            })}
+                        </select>
                     </div>
                 </div>
                 <div className="text-center">
