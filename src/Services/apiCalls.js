@@ -111,3 +111,23 @@ export const deleteAppointmentById= async(id,token)=>{
     })
     return await response.json()
 }
+
+export const createAppointment = async (data, token) => {
+
+    if (data.appointmentDate === "" && data.serviceId === null) {
+        return console.log("No Appointment date or Service");
+    }
+
+    const request = await fetch(`${URL}/api/appointments`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization":`Bearer ${token}`
+        },
+        body: JSON.stringify({appointmentDate:data.appointmentDate, serviceId:data.serviceId}),
+    });
+
+    const result = await request.json();
+
+    return result;
+}

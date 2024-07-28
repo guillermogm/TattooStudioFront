@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { deleteAppointmentById, getProfileAppointments, getServices } from '../../Services/apiCalls'
+import { createAppointment, deleteAppointmentById, getProfileAppointments, getServices } from '../../Services/apiCalls'
 import "./Appointments.css"
-import { CSelect } from '../../Components/CSelect/CSelect'
+
 
 export const Appointments = () => {
     const [error, setError] = useState("")
@@ -9,11 +9,10 @@ export const Appointments = () => {
     let [update, setUpdate] = useState(0)
     const [editing, setEditing] = useState(false)
     const [newAppointment, setNewAppointment] = useState({
-        userId: "",
-        serviceId: "",
-        date: ""
+        date: "",
+        serviceId: ""
     });
-    const [services, setServices]= useState([])
+    const [services, setServices] = useState([])
 
     useEffect(() => {
         const fullToken = JSON.parse(localStorage.getItem("fullToken"))
@@ -74,6 +73,18 @@ export const Appointments = () => {
         .toISOString()
         .slice(0, new Date().toISOString().lastIndexOf(":"));
 
+    const confirmButtonHandler = async () => {
+        const fullToken = JSON.parse(localStorage.getItem("fullToken"))
+        const token = fullToken.token
+        const response = await createAppointment(newAppointment, token)
+        if (response.success) {
+            const newData = await getProfileAppointments(token)
+            setAppointments(newData.data)
+            setEditing(!editing)
+            setUpdate(++ update)
+        }
+    }
+
     return (
         <>
             <h1 className="text-center mt-5 mb-5">Appointments</h1>
@@ -109,15 +120,15 @@ export const Appointments = () => {
                             type="datetime-local"
                             min={todayFullTimeString}
                             value={newAppointment.date}
-                            name="date"
+                            name="appointmentDate"
                             onChange={(e) => inputHandler(e)}
                             className={editing ? "mb-4 form-control" : "hidden"}
                         />
                     </div>
                     <div className="col-2">
-                        <select defaultValue="" onChange={inputHandler}  className={editing ? "mb-4 form-control" : "hidden"}>
+                        <select  name="serviceId" defaultValue="" onChange={inputHandler} className={editing ? "mb-4 form-control" : "hidden"}>
                             <option disabled hidden value="">
-                            Choose Service
+                                Choose Service
                             </option>
                             {services.map((service) => {
                                 return <option value={service.id} key={service.id}>{service.serviceName}</option>
@@ -129,7 +140,7 @@ export const Appointments = () => {
                     <input type="button" name="Create" className="btn btn-primary" value={editing ? "Cancel" : "Create"} onClick={editingButtonHandler} />
                 </div>
                 <div className="text-center mt-2">
-                    <input type="button" name="Save" value="Save" className={editing ? "btn btn-primary" : "hidden"} />
+                    <input type="button" name="Save" value="Save" className={editing ? "btn btn-primary" : "hidden"} onClick={confirmButtonHandler} />
                 </div>
             </div>
             <h1 className="text-center mt-5 mb-5">{error}</h1>
