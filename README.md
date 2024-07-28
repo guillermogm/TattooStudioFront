@@ -65,14 +65,13 @@ Users Example(Admin: william@william.com, 123456789)
 <div id="futuras-funcionalidades"> </div>
 
 ## Future features ⚙️
-[ ] View of a quote in detail.
-[ ]View of a user as ADMIN.
-[ ]Modification of a user as ADMIN.
-[ ]Access to a user's appointments as ADMIN.
-[ ]CRUD services like ADMIN.
-[ ]Data validation (check that the data entered is correct before sending it to the backend, etc.).
-[ ]Error management (informational messages from the expected password format to errors.
-from the backend).
+[ ] View of a quote in detail.<br/>
+[ ]View of a user as ADMIN.<br/>
+[ ]Modification of a user as ADMIN.<br/>
+[ ]Access to a user's appointments as ADMIN.<br/>
+[ ]CRUD services like ADMIN.<br/>
+[ ]Data validation (check that the data entered is correct before sending it to the backend, etc.).<br/>
+[ ]Error management (informational messages from the expected password format to errors from the backend).<br/>
 
 <div id="contribuciones"></div>
 
