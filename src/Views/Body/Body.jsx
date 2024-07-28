@@ -7,6 +7,7 @@ import { Login } from '../Login/Login'
 import { Services } from '../Services/Services'
 import { Profile } from '../Profile/Profile'
 import { Users } from '../Users/Users'
+import { Appointments } from '../Appointments/Appointments'
 
 export const Body = () => {
   const fullToken = JSON.parse(localStorage.getItem("fullToken"))
@@ -23,6 +24,7 @@ export const Body = () => {
         <Route path="/login" element={<Login/>}/>
         <Route path="/services" element={<Services/>}/>
         {fullToken && <Route path='/profile' element={<Profile />} />}
+        {fullToken && <Route path='/appointments' element={<Appointments />} />}
         {role == "3" && <Route path='/users' element={<Users />} />}
     </Routes>
     </>

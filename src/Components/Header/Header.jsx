@@ -63,6 +63,7 @@ export const Header = () => {
                             <>
                                 <div className="nav-item nav-link active" onClick={handleLogout}> Logout </div>
                                 <CNavigator className="nav-item nav-link active" path="/profile" content="Profile" />
+                                <CNavigator className="nav-item nav-link active" path="/appointments" content="Appointments" />
                             </>
                         ) : (
                             <>
