@@ -29,13 +29,13 @@ export const CLogin = () => {
       if (response.success) {
         navigate("/")
         const decodedToken =jwtDecode(response.token)
-        console.log(decodedToken);
         const fullToken={
           token:response.token,
           tokenData:decodedToken
         }
         localStorage.setItem("fullToken", JSON.stringify(fullToken))
         isTokenValid(fullToken.tokenData.exp)
+        window.location.reload();
       } else {
         setError("Error login user.")
       }
